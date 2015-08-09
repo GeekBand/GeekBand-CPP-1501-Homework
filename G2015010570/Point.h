@@ -6,7 +6,7 @@ public:
 	Point(int x, int y);
 	virtual ~Point();
 	void setX(int x);
-	int getX() const const;
+	int getX() const;
 	void setY(int y);
 	int getY() const;
 private:
