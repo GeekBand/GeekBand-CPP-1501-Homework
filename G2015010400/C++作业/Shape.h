@@ -11,7 +11,7 @@
 
 class Shape{
 public:
-    
+    Shape(int no_ = 0): no(no_){}
 private:
     int no;
 };
