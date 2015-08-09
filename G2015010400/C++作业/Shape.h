@@ -11,9 +11,9 @@
 
 class Shape{
 public:
-    Shape(int no_ = 0): no(no_){}
+    Shape():no(0){}
+    int getno() const { return no;}
 private:
     int no;
 };
-
 #endif

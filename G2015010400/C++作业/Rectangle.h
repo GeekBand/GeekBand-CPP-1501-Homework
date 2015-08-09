@@ -49,7 +49,7 @@ inline Rectangle::~Rectangle()
 
 inline ostream& operator<<(ostream& os, const Rectangle& other)
 {
-    os<<"("<<other.width<<","<<other.height<<")"<<getx(*(other.leftup))<<" "<<gety(*(other.leftup))<<endl;
+    os<<"Shape No."<<other.getno()<<" ("<<other.width<<","<<other.height<<")"<<getx(*(other.leftup))<<" "<<gety(*(other.leftup))<<endl;
     return os;
 }
 #endif
