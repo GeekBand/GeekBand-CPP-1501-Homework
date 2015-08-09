@@ -5,20 +5,20 @@ using namespace std;
 using namespace shape;
 
 int main(void) {
-	Rectangle rtl = Rectangle(100, 100, 1, 1);
-	cout << "rtl : " << rtl << endl;	
-
-	Rectangle rtl1 = Rectangle(100, 200, 2, 3);
+	Rectangle rtl1 = Rectangle(100, 100, 1, 1);
 	cout << "rtl1 : " << rtl1 << endl;	
 
-	Rectangle rtl2 = rtl1;
+	Rectangle rtl2 = Rectangle(rtl1);
 	cout << "rtl2 : " << rtl2 << endl;	
 
-	Rectangle rtl3 = Rectangle(rtl1);
-	cout << "rtl3 : " << rtl3 << endl;	
+	rtl1.set_leftup(NULL);
+	cout << "rtl1 : " << rtl1 << endl;	
 
-	rtl3 = rtl;
-	cout << "rtl3 : " << rtl3 << endl;	
+	rtl2 = rtl1;
+	cout << "rtl2 : " << rtl2 << endl;	
+
+	rtl2 = rtl2;
+	cout << "rtl2 : " << rtl2 << endl;	
 
 	getchar();
 	return 0;
