@@ -18,13 +18,13 @@ Rectangle::Rectangle(const Rectangle& other):Shape(other.no) {
 
 Rectangle& Rectangle::operator=(const Rectangle& other) {
 	if (this == &other) {
-		return this;
+		return *this;
 	}
 	this->width = other.width;
 	this->height = other.height;
 	delete this->leftUp;
 	this->leftUp = new Point(other.getX(), other.getY());
-	return this;
+	return *this;
 }
 
 void Rectangle::setHeight(int height) {
