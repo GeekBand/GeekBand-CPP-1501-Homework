@@ -9,7 +9,7 @@ public:
 	int getX() const const;
 	void setY(int y);
 	int getY() const;
-protected:
+private:
 	int x;
 	int y;
 };
