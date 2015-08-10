@@ -4,15 +4,31 @@
 using std::ostream;
 using std::endl;
 
+//Shape
 class Shape {
 	int number;
+	static unsigned NumberCounter;
+public:
+	Shape() {
+		number = NumberCounter++;
+	}
+	virtual ~Shape() = default;
 };
+unsigned Shape::NumberCounter = 0;
+
+
+
+//Point
 class Point {
 public:
-	Point() :x(0), y(0) {}
+	Point(int _x = 0, int _y = 0) :x(_x), y(_y) {}
 public:
 	int x, y;
 };
+
+
+
+//Rectangle
 class Rectangle :public Shape {
 
 private://Field
@@ -38,7 +54,7 @@ private://Help Methon
 
 		return *dest;
 	}
-	ostream& print_Rectangle(ostream& os) {
+	ostream& print_Rectangle(ostream& os) const{
 		os << "the rect widht:" << this->Width() << " height:" << this->Height() << endl;
 		return os;
 	}
@@ -50,7 +66,7 @@ public://Constructor & operator
 	Rectangle& operator =(const Rectangle& cp);
 	~Rectangle();
 
-	friend ostream& operator <<(ostream& os, Rectangle& rect) {
+	friend ostream& operator <<(ostream& os,const Rectangle& rect) {
 		return rect.print_Rectangle(os);
 	}
 
