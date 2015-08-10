@@ -2,40 +2,50 @@
 #define _RECTANGLE_
 
 class Shape{
-  int no;
-}
+private:
+	int no;
+public:
+	Shape(int _no = 0) :no(_no){}
+};
 
 class Point{
-  int x;
-  int y;
-public:
-  Point(const Point &p):x( p.x ),y( p.y ){}
-  Point()=default;
-}
-
-class Rectangle:public Shape{
 private:
-  int height;
-  int width;
-  Point *leftUp;
+	int x;
+	int y;
 public:
-  Rectangle(int _w = 0,int _h = 0,int _x = 0,int _y = 0):width( _w ),height( _h ),x( _x ),y( _y ){}
-  Rectangle(const Rectangle &other):height( other.height ),width( other.width ),leftUp( new Point( other.leftUp ) ){}
-  Rectangle& operator=(const Rectanle &other){
-    if(other == this){
-      return *this;
-    }else{
-      delete leftUp;
-      leftUp = new Point( other );
-      height = other.height;
-      width = other.width;
-      return *this;
-    }
-    ~Rectangle(){
-      delete leftUp;
-    }
-  }
-}
+	Point(int _x = 0, int _y = 0) :x(_x), y(_y){}
+};
 
+class Rectangle :public Shape{
+private:
+	int width;
+	int height;
+	Point *leftUp;
+public:
+	Rectangle(int _width = 0, int _height = 0, int _x = 0, int _y = 0, int _no = 0) :width(_width), height(_height), leftUp(new Point(_x, _y)), Shape(_no){
+		// 构造函数
+	}
+	Rectangle(const Rectangle& other) :Shape(other),width(other.width), height(other.height), leftUp(new Point(*other.leftUp)){
+		// 拷贝构造函数
+	}
+	Rectangle& operator=(const Rectangle& other){
+		//　重载赋值运算符
+		if (this == &other){
+			return *this;
+		}
+		else{
+			this->width = other.width;
+			this->height = other.height;
+			delete this->leftUp;
+			this->leftUp = new Point(*other.leftUp);
+			Shape::operator=(other);
+			return *this;
+		}
+	}
+	~Rectangle(){
+		delete leftUp;
+		leftUp = nullptr;
+	}
+};
 
 #endif
