@@ -9,6 +9,7 @@ class Shape {
 	int number;
 	static unsigned NumberCounter;
 public:
+	int ID()const { return number; }
 	Shape() {
 		number = NumberCounter++;
 	}
@@ -54,19 +55,18 @@ private://Help Methon
 
 		return *dest;
 	}
-	ostream& print_Rectangle(ostream& os) const{
+	ostream& print_Rectangle(ostream& os) const {
 		os << "the rect widht:" << this->Width() << " height:" << this->Height() << endl;
 		return os;
 	}
 
 public://Constructor & operator
-	Rectangle();
-	Rectangle(int w, int h);
+	Rectangle(int w = 0, int h = 0, int _x = 0, int _y = 0);
 	Rectangle(const Rectangle& cp);
 	Rectangle& operator =(const Rectangle& cp);
 	~Rectangle();
 
-	friend ostream& operator <<(ostream& os,const Rectangle& rect) {
+	friend ostream& operator <<(ostream& os, const Rectangle& rect) {
 		return rect.print_Rectangle(os);
 	}
 
@@ -85,15 +85,12 @@ public://Property
 	}
 };
 
-inline Rectangle::Rectangle() :Rectangle(0, 0) {}
 
-inline Rectangle::Rectangle(int w, int h) : width(w), height(h) {
-	Pt_leftUp = new Point;
-}
+inline Rectangle::Rectangle(int w, int h, int _x, int _y) :
+	width(w), height(h), Pt_leftUp(new Point(_x, _y)) {}
 
-inline Rectangle::Rectangle(const Rectangle & cp) {
-	do_RectangleCopy(this, cp);
-}
+inline Rectangle::Rectangle(const Rectangle & cp) :
+	Rectangle(cp.width, cp.height, cp.Pt_leftUp->x, cp.Pt_leftUp->y) {}
 
 inline Rectangle & Rectangle::operator=(const Rectangle & cp) {
 	return do_RectangleCopy(this, cp);
