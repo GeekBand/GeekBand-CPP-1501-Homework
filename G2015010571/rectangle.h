@@ -11,7 +11,7 @@ class Point{
 	int x;
 	int y;
 public:
-	Point(int _x, int _y): x(_x), y(_y){}
+	Point(int x, int y): x(x), y(y){}
 };
 
 class Rectangle: public Shape{
