@@ -17,7 +17,6 @@ public:
 class Rectangle: public Shape{
 	int width;
 	int height;
-	
 	Point *leftUp;
 
 public:
@@ -27,15 +26,9 @@ public:
 	virtual ~Rectangle();
 };
 
-Rectangle::Rectangle(int width, int height, int x, int y): width(width), height(height){
-	leftUp = new Point(x, y);
-}
+Rectangle::Rectangle(int width, int height, int x, int y): width(width), height(height), leftUp(new Point(x, y)){ }
 
-Rectangle::Rectangle(const Rectangle& other){
-	width = other.width;
-	height = other.height;
-	leftUp = new Point(*other.leftUp);
-}
+Rectangle::Rectangle(const Rectangle& other): width(other.width), height(other.height), leftUp(new Point(*other.leftUp)){ }
 
 Rectangle& Rectangle::operator=(const Rectangle& other){
 	if(this == &other){
@@ -50,6 +43,7 @@ Rectangle& Rectangle::operator=(const Rectangle& other){
 
 Rectangle::~Rectangle(){
 	delete leftUp;
+	leftUp = NULL;
 }
 
 #endif
