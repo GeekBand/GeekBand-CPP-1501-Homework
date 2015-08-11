@@ -36,9 +36,12 @@ Rectangle& Rectangle::operator=(const Rectangle& other){
 	}
 	Shape::operator=(other);
 	delete leftUp;
+	leftUp = NULL;
 	width = other.width;
 	height = other.height;
-	leftUp = new Point(*other.leftUp);
+	if(other.leftUp != NULL) {
+		leftUp = new Point(*other.leftUp);
+	}
 	return *this;
 }
 
