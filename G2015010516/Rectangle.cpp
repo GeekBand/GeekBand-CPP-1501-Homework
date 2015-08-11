@@ -1,12 +1,43 @@
 #include "Rectangle.h"
 
 
-Rectangle::Rectangle(int width,int height):width(width),height(height)
+//******************************************************
+void Shape::setNo(int no)
 {
-	this->leftUp = new Point();
-
+	this->no = no;
 }
 
+int Shape::getNo() const
+{
+	return this->no;
+}
+//******************************************************
+Point::Point(int inputX,int inputY):x(inputX),y(inputY)
+{	
+}
+int Point::getX() const
+{
+	return this->x;
+}
+int Point::getY() const
+{
+	return this->y;
+}
+void Point::setX(int x)
+{
+	this->x = x;
+}
+void Point::setY(int y)
+{
+	this->y = y;
+}
+
+//******************************************************
+Rectangle::Rectangle(int width,int height,int x,int y):width(width),height(height)
+{
+	this->leftUp = new Point(x,y);
+
+}
 
 Rectangle::Rectangle(const Rectangle &other):Shape(other),width(other.width),height(other.height)
 {
@@ -21,7 +52,6 @@ Rectangle::Rectangle(const Rectangle &other):Shape(other),width(other.width),hei
 	
 
 }
-
 
 Rectangle& Rectangle::operator=(const Rectangle &other)
 {
@@ -57,9 +87,37 @@ Rectangle& Rectangle::operator=(const Rectangle &other)
 	return *this;
 }
 
-
 Rectangle::~Rectangle()
 {
 	delete this->leftUp ;
 	this->leftUp = 0;
+}
+
+int Rectangle::getWidth() const
+{
+	return this->width;
+
+}
+
+int Rectangle::getHeight() const
+{
+	return this->height;
+
+}
+
+void Rectangle::setWidth(int width)
+{
+	this->width = width;
+
+}
+
+void Rectangle::setHeight(int height)
+{
+	this->height = height;
+
+}	
+
+Point* Rectangle::getLeftUp() const
+{
+	return this->leftUp;
 }
