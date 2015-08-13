@@ -1,8 +1,6 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-#include <stdlib.h>
-
 class Shape
 {
     int no;
