@@ -6,6 +6,7 @@ private:
 	int no;
 public:
 	Shape(int _no = 0) :no(_no){}
+	virtual ~Shape(){}
 };
 
 class Point{
