@@ -52,7 +52,8 @@ Rectangle::operator= (const Rectangle &other)
   if (this == &other) {
     return *this;
   }
-  
+
+  delete leftUp_;
   width_ = other.width_;
   height_ = other.height_;
   leftUp_ = new Point(other.leftUp_->x(), other.leftUp_->y());
