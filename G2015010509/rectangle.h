@@ -30,17 +30,29 @@ inline Rectangle::Rectangle(int width, int height, int x, int y)
 }
 
 inline Rectangle::Rectangle(const Rectangle& other)
-	: width(other.width), height(other.height) {
-	leftUp = new Point(*other.leftUp);
+	: Shape(other), width(other.width), height(other.height), leftUp(NULL) {
+    if (other.leftUp) {
+	    leftUp = new Point(*other.leftUp);
+    }
 }
 
 inline Rectangle& Rectangle::operator=(const Rectangle& other) {
 	if (this == &other) return *this;
 
+    Shape::operator=(other);
 	width = other.width;
 	height = other.height;
 
-	*leftUp = *other.leftUp;
+    if (other.leftUp) {
+        if (leftUp) {
+        	*leftUp = *other.leftUp;
+        } else {
+            leftUp = new Point(*other.leftUp);
+        }
+    } else {
+        delete leftUp;
+        leftUp = NULL;
+    }
 
 	return *this;
 }
