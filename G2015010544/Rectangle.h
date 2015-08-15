@@ -23,7 +23,12 @@ public:
 	Rectangle& operator=(const Rectangle& other);
 	~Rectangle();
 
-}
+	int getArea()
+	{
+		return this->width * this->height;
+	}
+
+};
 
 inline Rectangle::Rectangle(const Rectangle& other) 
 {

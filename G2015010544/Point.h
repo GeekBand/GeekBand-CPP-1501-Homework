@@ -13,7 +13,7 @@ public:
 
 	int getPointX(void) const { return this->x; } 
 	int getPointY(void) const { return this->y; }
-}
+};
 
 
 #endif
