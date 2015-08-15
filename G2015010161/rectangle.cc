@@ -4,15 +4,17 @@ using std::ostream;
 using std::endl;
 
 Rectangle::Rectangle(int w, int h, int x, int y):
-    width(w), height(h)
+    width(w), height(h), leftUp(new Point(x, y))
 {
-    leftUp = new Point(x, y);
 }
 
 Rectangle::Rectangle(const Rectangle &rec):
-    width(rec.width), height(rec.height)
+    Shape(rec), width(rec.width), height(rec.height)
 {
-    leftUp = new Point(rec.leftUp->getX(), rec.leftUp->getY());
+    if (rec.leftUp != NULL)
+        leftUp = new Point(*rec.leftUp);
+    else
+        leftUp = NULL;
 }
 
 Rectangle &Rectangle::operator=(const Rectangle &rec)
@@ -20,9 +22,17 @@ Rectangle &Rectangle::operator=(const Rectangle &rec)
     if (this == &rec)
         return *this;
 
+    Shape::operator=(rec);
     this->width = rec.width;
     this->height = rec.height;
-    this->leftUp->updatePosition(rec.leftUp->getX(), rec.leftUp->getY());
+    if (rec.leftUp != NULL) {
+        if (leftUp != NULL)
+            *leftUp = *rec.leftUp;
+        else
+            leftUp = new Point(*rec.leftUp);
+    }
+    else
+        leftUp = NULL;
 
     return *this;
 }
@@ -30,6 +40,7 @@ Rectangle &Rectangle::operator=(const Rectangle &rec)
 Rectangle::~Rectangle()
 {
     delete leftUp;
+    leftUp = NULL;
 }
 
 ostream &operator<<(ostream &os, const Rectangle &rec)

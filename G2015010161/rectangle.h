@@ -17,11 +17,6 @@ public:
 
     int getX() const {return x;}
     int getY() const {return y;}
-    void updatePosition(int a, int b)
-    {
-        x = a;
-        y = b;
-    }
 private:
     int x;
     int y;
