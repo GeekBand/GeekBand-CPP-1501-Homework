@@ -25,7 +25,5 @@ int main(int argc, const char * argv[]) {
     Rectangle r4 = *r1;
     cout << "Width: "<< r4.w() << ", Height: " << r4.h() <<  ", LeftUp: (" << r4.getleftup()->xVal() << ", "<< r4.getleftup()->yVal() << "), LeftUp Address: " << r4.getleftup() << endl;
     
-
-    
     return 0;
 }
