@@ -1,7 +1,7 @@
 #ifndef __POINT__
 #define __POINT__
 
-namespace shape
+namespace Geekband
 {
 	class Point;
 
@@ -10,8 +10,10 @@ namespace shape
 		int x;
 		int y;
 	public:
-		Point() : x(0), y(0) {}
+		// 没必要写，编译器自动生成
+		// Point() : x(0), y(0) {}
 		Point(int x, int y) : x(x), y(y) {}
+		
 		int X() { return x; }
 		void X(int x) { this->x = x; }
 		int Y() { return y; }

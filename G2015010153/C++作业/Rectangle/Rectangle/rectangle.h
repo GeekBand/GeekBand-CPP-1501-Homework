@@ -7,12 +7,13 @@
 
 using namespace std;
 
-namespace shape
+namespace Geekband
 {
+	// 先画 <内存模型>
 
 	class Retangle;
 
-	class Rectangle: public shape {
+	class Rectangle: public Shape {
 		int width;
 		int height;
 
@@ -20,7 +21,7 @@ namespace shape
 
 	public:
 		Rectangle();
-		Rectangle(int width, int height, int x, int y);
+		Rectangle(int width, int height, int x, int y, int no);
 		Rectangle(const Rectangle& other);
 		Rectangle& operator =(const Rectangle& other);
 		~Rectangle();
@@ -34,23 +35,32 @@ namespace shape
 
 	inline
 		Rectangle::Rectangle()
-		: width(0), height(0), leftUp(new Point(0, 0))
+		: Shape(0), width(0), height(0), leftUp(new Point(0, 0))
 	{ }
 
 	inline
-	Rectangle::Rectangle(int width, int height, int x, int y)
-		: width(width), height(height), leftUp(new Point(x, y))
+	Rectangle::Rectangle(int width, int height, int x, int y, int no)
+		: Shape(no), width(width), height(height), leftUp(new Point(x, y))
 	{ }
 
+	// 无参构造函数 => 缺省构造函数
+	// 只有自己写了一个有参的构造函数，编译器就不会生成默认缺省构造函数
+
+
+	// 大括号内只对指针成员处理，其他全部放在初值列
 	inline
 	Rectangle::Rectangle(const Rectangle& other)
-		: width(other.width), height(other.height)
+		: Shape(other), width(other.width), height(other.height)
+		// 调用顺序与书写顺序无关,先父类后子类,子类按照声明顺序来,尽量写成标准顺序
 	{
-
-		if(other.leftUp == NULL) { // nullptr
-			leftUp = NULL; // nullptr
+		// leftup 默认是随机值~
+		if(other.leftUp == 0) { // nullptr
+			leftUp = 0; // nullptr
 		} else {
-			leftUp = new Point(other.leftUp->X(), other.leftUp->Y());
+			// 保证 添加z变量时，不需要修改代码，所以copy ctr
+			// this->leftUp = new Point(other.leftUp->X(), other.leftUp->Y());
+			// 三大函数，编译器自动生成
+			leftUp = new Point(*other.leftUp);
 		}
 	}
 
@@ -61,11 +71,24 @@ namespace shape
 			return *this;
 		}
 
-		shape::operator = (other);
+		// delete nullptr; 没问题
+		// 但是 delete 悬浮指针有问题
+
+		// copy assign时间点，左右两边的对象都是构造过的
+		// 任何一个对象都有责任保证初始化之后内部的指针要么是0要么是nullptr
+
+		// 显示调用父类copy assign
+		// ！完备处理父类成员，防止父类代码修改
+		// 必须加shape作用域
+		// 前头可以加this
+		// 调用继承下来的赋值操作符
+		// 在前面写~~ 之后写子类
+		/*this->*/Shape::operator = (other);
 
 		width = other.width;
 		height = other.height;
 
+		/*
 		if(other.leftUp == NULL) { // nullptr
 			if(leftUp != NULL) {
 				delete leftUp;
@@ -79,6 +102,21 @@ namespace shape
 				leftUp->Y(other.leftUp->Y());
 			}
 		}
+		*/
+
+		// 显示调用copy assign
+		if(leftUp != 0 && other.leftUp != 0) {
+			*leftUp = *other.leftUp; // !!!
+		} else {
+			if (leftUp == 0 && other.leftUp != 0) {
+				leftUp = new Point(*other.leftUp);
+			} else if (other.leftUp == 0 && leftUp != 0) {
+				delete leftUp;
+				// 避免leftUp成为悬浮指针
+				leftUp = 0;
+				// 可以不写，因为调用了析构函数，对象都没了
+			}
+		}
 
 		return *this;
 	}
@@ -86,7 +124,7 @@ namespace shape
 
 	inline
 	void Rectangle::set_leftup(Point* leftUp) {
-		if(this->leftUp != NULL) { // nullptr
+		if(this->leftUp != 0) { // nullptr
 			delete this->leftUp;
 		}
 		this->leftUp = leftUp;
@@ -99,13 +137,13 @@ namespace shape
 
 	inline
 	Rectangle::~Rectangle() {
-		if(leftUp != NULL) { // nullptr
+		// if(leftUp != NULL) { // nullptr
 			delete leftUp;
-		}
+		// }
 	}
 
 	ostream& operator << (ostream& os, const Rectangle& rtl) {
-		if(rtl.get_leftup() == NULL) {
+		if(rtl.get_leftup() == 0) {
 			return cout << "[width : " << rtl.width << ", height : " << rtl.height << ", leftUp : NULL]";
 		}
 		return cout << "[width : " << rtl.width << ", height : " << rtl.height <<

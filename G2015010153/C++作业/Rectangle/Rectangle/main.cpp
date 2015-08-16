@@ -2,10 +2,10 @@
 #include "rectangle.h"
 
 using namespace std;
-using namespace shape;
+using namespace Geekband;
 
 int main(void) {
-	Rectangle rtl1 = Rectangle(100, 100, 1, 1);
+	Rectangle rtl1 = Rectangle(100, 100, 1, 1, 0);
 	cout << "rtl1 : " << rtl1 << endl;	
 
 	Rectangle rtl2 = Rectangle(rtl1);
