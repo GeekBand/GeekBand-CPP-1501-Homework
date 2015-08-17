@@ -10,9 +10,7 @@ class Shape {
 	static unsigned NumberCounter;
 public:
 	int ID()const { return number; }
-	Shape() {
-		number = NumberCounter++;
-	}
+	Shape(): number(NumberCounter++){}
 	virtual ~Shape() = default;
 };
 unsigned Shape::NumberCounter = 0;
@@ -47,11 +45,18 @@ private://Help Methon
 		dest->width = src.width;
 		dest->height = src.height;
 
-		if (dest->Pt_leftUp == NULL) {
-			dest->Pt_leftUp = new Point;
+		if (src.Pt_leftUp != nullptr) {
+			if (dest->Pt_leftUp == nullptr) {
+				dest->Pt_leftUp = new Point;
+			}
+			*dest->Pt_leftUp = *src.Pt_leftUp;
 		}
-		dest->Pt_leftUp->x = src.Pt_leftUp->x;
-		dest->Pt_leftUp->y = src.Pt_leftUp->y;
+		else {
+			if (dest->Pt_leftUp != nullptr) {
+				delete dest->Pt_leftUp;
+				dest->Pt_leftUp = nullptr;
+			}
+		}
 
 		return *dest;
 	}
@@ -64,7 +69,7 @@ public://Constructor & operator
 	Rectangle(int w = 0, int h = 0, int _x = 0, int _y = 0);
 	Rectangle(const Rectangle& cp);
 	Rectangle& operator =(const Rectangle& cp);
-	~Rectangle();
+	virtual ~Rectangle();
 
 	friend ostream& operator <<(ostream& os, const Rectangle& rect) {
 		return rect.print_Rectangle(os);
@@ -90,17 +95,18 @@ inline Rectangle::Rectangle(int w, int h, int _x, int _y) :
 	width(w), height(h), Pt_leftUp(new Point(_x, _y)) {}
 
 inline Rectangle::Rectangle(const Rectangle & cp) :
-	Rectangle(cp.width, cp.height, cp.Pt_leftUp->x, cp.Pt_leftUp->y) {}
+	Rectangle(cp.width, cp.height) {
+	if (cp.Pt_leftUp != nullptr) {
+		Pt_leftUp = new Point(*cp.Pt_leftUp);
+	}
+}
 
 inline Rectangle & Rectangle::operator=(const Rectangle & cp) {
 	return do_RectangleCopy(this, cp);
 }
 
 inline Rectangle::~Rectangle() {
-	if (Pt_leftUp) {
-		delete Pt_leftUp;
-		Pt_leftUp = nullptr;
-	}
+	delete Pt_leftUp;
 }
 
 #endif
