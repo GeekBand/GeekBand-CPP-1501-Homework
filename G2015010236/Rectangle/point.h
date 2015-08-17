@@ -6,9 +6,7 @@ class Point;
 class Point
 {
 public:
-	Point(int x = 0, int y = 0) : x_(x), y_(y) {}
-	Point(const Point& other_point);
-	Point& operator = (const Point& other_point);
+	Point(int x = 0, int y = 0) : x_(x), y_(y) {} // class without pointer: use default big three
 	~Point() {}
 	int x() const { return x_; }
 	int y() const { return y_; }
@@ -20,20 +18,6 @@ private:
 	int y_;
 };
 
-inline 
-	Point::Point(const Point& other_point)
-{
-	x_ = other_point.x_;
-	y_ = other_point.y_; 
-}
-
-inline Point&
-	Point::operator= (const Point& other_point)
-{
-	x_ = other_point.x_; 
-	y_ = other_point.y_; 
-	return *this;
-}
 
 #include <iostream>
 

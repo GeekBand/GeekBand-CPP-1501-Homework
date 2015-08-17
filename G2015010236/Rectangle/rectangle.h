@@ -48,9 +48,9 @@ inline Rectangle&
 {
 	if ( this != &other_rectangle ) {
 		if ( other_rectangle.leftUp != nullptr ) { 
-			Point* leftUp_origin = this->leftUp;
-			this->leftUp = new Point(*other_rectangle.leftUp);
-			delete leftUp_origin;
+			Point* leftUp_origin = this->leftUp; // copy leftUp before it is deleted for the case that new expression is failed and throw exception
+			this->leftUp = new Point(*other_rectangle.leftUp); // excepetion safety also cause self-assignment safety
+			delete leftUp_origin; //if new expression success, delete the copy of leftUp
 			this->Shape::operator=(other_rectangle); // explict call base class's operator= 
 			this->width_ = other_rectangle.width_;
 			this->height_ = other_rectangle.height_;
@@ -68,7 +68,9 @@ inline Rectangle&
 inline
 	Rectangle::~Rectangle()
 {
-	delete this->leftUp;
+	delete this->leftUp; 
+	// delete a pointer and then assign nullptr to it 
+	this->leftUp = nullptr;
 	std::cout << "Rectangle Destructed!" << std::endl;
 }
 

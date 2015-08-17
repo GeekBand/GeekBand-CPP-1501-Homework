@@ -6,9 +6,7 @@ class Shape;
 class Shape
 {
 public:
-	Shape(int no = 0) : no_(no) {}
-	Shape(const Shape&);
-	Shape& operator= (const Shape&);
+	Shape(int no = 0) : no_(no) {} //class without pointer: use default big three
 	virtual ~Shape() {}
 
 	int no() const { return no_;}
@@ -17,19 +15,6 @@ private:
 	int no_;
 };
 
-inline
-	Shape::Shape(const Shape& other_shape) 
-{
-	this->no_ = other_shape.no_;
-}
 
-inline Shape&
-	Shape::operator= (const Shape& other_shape)
-{
-	if (this != &other_shape) {
-		this->no_ = other_shape.no_;
-	}
-	return *this;
-}
 
 #endif
