@@ -29,8 +29,13 @@ private:
 inline
 	Rectangle::Rectangle(const Rectangle& other_rectangle)
 {
-	width_ = other_rectangle.width_;
-	leftUp = new Point(*other_rectangle.leftUp);
+	if (other_rectangle.leftUp != nullptr) {
+		width_ = other_rectangle.width_;
+		leftUp = new Point(*other_rectangle.leftUp);
+	}
+	else {
+		std::cerr << "Copy is Failed! Other Rectangle' leftUp pointer is NULL!" << std::endl;
+	}
 }
 
 inline Rectangle&
@@ -39,11 +44,16 @@ inline Rectangle&
 	if (this == &other_rectangle) {
 
 	}
-	else {
-		width_ = other_rectangle.width_;
-		height_ = other_rectangle.height_;
-		delete leftUp;
-		leftUp = new Point(*other_rectangle.leftUp);
+	else { 
+		if (other_rectangle.leftUp != nullptr) { 
+		    width_ = other_rectangle.width_;
+		    height_ = other_rectangle.height_;
+		    delete leftUp;
+		    leftUp = new Point(*other_rectangle.leftUp);
+		}
+		else {
+			std::cerr << "Copy is Falied! Other Rectangle' leftUp pointer is NULL!" << std::endl;
+		}
 	}
 	return *this;
 }
