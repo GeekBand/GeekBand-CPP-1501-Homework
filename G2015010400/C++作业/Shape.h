@@ -11,9 +11,15 @@
 
 class Shape{
 public:
-    Shape():no(0){}
+    Shape(){
+        no = count++;
+    }
     int getno() const { return no;}
 private:
     int no;
+    static int count;
 };
+
+int Shape::count = 1;
+
 #endif
