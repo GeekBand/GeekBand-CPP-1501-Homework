@@ -19,21 +19,21 @@ Shape** Process(int &size){
 		}
 	}
 
-	// 对图形进行筛选
+	// 对图形进行筛选，记录下来符合要求图形在arr中的下标
 	size = 0;
 	int index[arr_size];
 	for (int i = 0; i < arr_size; i++){
 		if (arr[i]->getArea() >= 50){
-			//cout << "ok" << endl;
+			// 符合要求，记录下来
 			index[size] = i;
-			size = size + 1;
+			size += 1;
 		}
 	}
 	Shape**result = new Shape*[size];
 
 	int n = 0;
 	for (int i = 0; i < arr_size; i++){
-		// 有用的放到result里面返回，没用的delete
+		// 符合要求的放到result里面返回，没用的delete
 		if (i == index[n]){
 			// save
 			result[n] = arr[i];
