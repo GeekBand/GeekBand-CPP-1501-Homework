@@ -26,5 +26,4 @@ inline int gety(const Point& point){
     return point.y;
 }
 
-
 #endif

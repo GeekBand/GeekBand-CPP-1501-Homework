@@ -29,21 +29,40 @@ private:
     Point* leftup;
 };
 
-inline Rectangle::Rectangle(const Rectangle& other)
+inline Rectangle::Rectangle(const Rectangle& other): width(other.width), height(other.height), Shape(other)
 {
-    width = other.width;
-    height = other.height;
-    leftup = new Point(getx(*(other.leftup)), gety(*(other.leftup)));
+    if (other.leftup != nullptr) {
+        leftup = new Point(*other.leftup);
+    }else{
+        leftup = nullptr;
+    }
+    
 }
 inline Rectangle& Rectangle::operator=(const Rectangle& other)
 {
-    width = other.width;
-    height = other.height;
-    leftup = new Point(getx(*(other.leftup)), gety(*(other.leftup)));
-    return *this;
+    if (this != &other) {
+        width = other.width;
+        height = other.height;
+        Shape::operator=(other);
+        if (leftup!=nullptr && other.leftup!=nullptr) {
+            *leftup = *other.leftup;
+        }else{
+            if (leftup == nullptr) {
+                leftup = new Point(*other.leftup);
+            }else{
+                delete leftup;
+            }
+        }
+        
+        return *this;
+    }else{
+        return *this;
+    }
+    
 }
 inline Rectangle::~Rectangle()
 {
+    count--;
     delete leftup;
 }
 

@@ -15,9 +15,13 @@ public:
         no = count++;
     }
     int getno() const { return no;}
+    virtual ~Shape(){ count--; }
+    
+    static int count;
+    
 private:
     int no;
-    static int count;
+    
 };
 
 int Shape::count = 1;
