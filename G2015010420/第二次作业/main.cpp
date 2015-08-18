@@ -5,13 +5,12 @@
 
 using namespace std;
 
-
-
 Shape** Process(int &size){
+	const int arr_size = 20;
 	// 生成20个图形
 	srand((unsigned)time(NULL));
-	Shape *arr[20];
-	for (int i = 0; i < 20; i++){
+	Shape *arr[arr_size];
+	for (int i = 0; i < arr_size; i++){
 		if (i < 10){
 			arr[i] = new Rectangle(rand() % 10 + 1, rand() % 10 + 1, rand() % 10 + 1, rand() % 10 + 1);
 		}
@@ -22,9 +21,8 @@ Shape** Process(int &size){
 
 	// 对图形进行筛选
 	size = 0;
-	int index[20];
-	for (int i = 0; i < 20; i++){
-		//arr[i]->detail();
+	int index[arr_size];
+	for (int i = 0; i < arr_size; i++){
 		if (arr[i]->getArea() >= 50){
 			//cout << "ok" << endl;
 			index[size] = i;
@@ -33,25 +31,19 @@ Shape** Process(int &size){
 	}
 	Shape**result = new Shape*[size];
 
-	for (int i = 0; i < 20; i++){
-		cout << index[i] << endl;
-	}
-
 	int n = 0;
-	for (int i = 0; i < 20; i++){
+	for (int i = 0; i < arr_size; i++){
 		// 有用的放到result里面返回，没用的delete
 		if (i == index[n]){
-			cout << "save  " << i << endl;
+			// save
 			result[n] = arr[i];
 			n++;
 		}
 		else{
-			cout << "delete " << i << endl;
+			// delete
 			delete arr[i];
 		}
 	}
-
-
 	return result;
 }
 
@@ -59,12 +51,13 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	int a = 0;
 	Shape**p = Process(a);
-	cout << "一共包含有效图形 " << a << " 个" << endl;
-	/*
-		do something
-	*/
+	// 符合要求的图形个数是a个
+	// do something
+	for (int i = 0; i < a; i++){
+		p[i]->detail();
+	}
+	// delete
 	for (int i = 0; i < a; i++){
 		delete p[i];
-	}	
+	}
 }
-
