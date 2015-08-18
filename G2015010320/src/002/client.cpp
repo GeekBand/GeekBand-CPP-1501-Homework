@@ -57,6 +57,9 @@ void clean(Shape **shapes, int size)
 #include <stdlib.h>
 int main() {
   const int SIZE = 20;
+  // It's not a good practice.
+  // The raw point should be treated with RAII method,
+  // so std::list<std::scoped_ptr<Shape>> is preferred.
   Shape **shapes = new Shape*[SIZE];
   srand((unsigned)time(0));
 
