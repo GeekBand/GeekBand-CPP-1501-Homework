@@ -10,8 +10,8 @@ class Point {
 	int y;
 	
 	public:
-		Point(int x, int y) : x(x), y(y) {}
-		Point(const Point* other) : x(other->x), y(other->y) {}
+		Point(int _x, int _y) : x(_x), y(_y) {}
+		Point(const Point& other) : x(other.x), y(other.y) {}
 };
 
 
@@ -28,16 +28,11 @@ class Rectangle : public Shape {
 		~Rectangle();
 };
 
-Rectangle::Rectangle(int width, int height, int x, int y) : width(width), height(height) {
-	leftUp = new Point(x, y);
-}
+Rectangle::Rectangle(int width, int height, int x, int y) : width(width), height(height), leftUp(new Point(x, y)) {}
 
-Rectangle::Rectangle(const Rectangle& other) {
-	this->width = other.width;
-	this->height = other.height;
-	
+Rectangle::Rectangle(const Rectangle& other) : Shape(other), width(other.width), height(other.height) {
 	if (other.leftUp != NULL) {
-		this->leftUp = new Point(other.leftUp);	
+		this->leftUp = new Point(*other.leftUp);	
 	}
 	else {
 		this->leftUp = NULL;
@@ -49,28 +44,31 @@ Rectangle& Rectangle::operator=(const Rectangle& other) {
 		return *this;
 	}
 	
+	this->Shape::operator=(other);
 	this->width = other.width;
 	this->height = other.height;
 	
-	if (leftUp != NULL) {
-		delete leftUp;
-	}
-	
 	if (other.leftUp != NULL) {
-		leftUp = new Point(other.leftUp);
+		if (this->leftUp == NULL) {
+			this->leftUp = new Point(*other.leftUp);
+		}
+		else {
+			*this->leftUp = *other.leftUp;
+		}
 	}
 	else {
-		this->leftUp = NULL;
-	}
+		if (this->leftUp != NULL) {
+			delete this->leftUp;
+			this->leftUp = NULL;
+		}
+	}	
 	
 	return *this;
 }
 
 Rectangle::~Rectangle() {
-	if (leftUp != NULL) {
-		delete leftUp;
-		leftUp = NULL;
-	}
+	delete leftUp;
+	leftUp = NULL;
 }
 
 #endif
