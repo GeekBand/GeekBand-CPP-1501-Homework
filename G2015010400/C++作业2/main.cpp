@@ -25,9 +25,11 @@ int main(int argc, const char * argv[]) {
         arrayShip[i] = new Circle(rand()%11, Point(rand()%11, rand()%11), i + 1);
     }
     
+    /*  test
     for (int i = 0; i < 20; i++) {
         (*arrayShip[i]).display();
     }
+    */
     
     Shape* arraySubstract[20];
     Shape** str = arraySubstract;
