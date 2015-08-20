@@ -1,10 +1,3 @@
-/*
- * Circle.cpp
- *
- *  Created on: Aug 20, 2015
- *      Author: zzhang
- */
-
 #include "Circle.h"
 
 Circle::Circle(int no, int x, int y, int radius) :
