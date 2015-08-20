@@ -21,8 +21,7 @@ Rectangle& Rectangle::operator=(const Rectangle& other) {
 	this->no = other.no;
 	this->width = other.width;
 	this->height = other.height;
-	this->leftUp->setX(other.getX());
-	this->leftUp->setY(other.getY());
+	*this->leftUp = *other.leftUp;
 	return *this;
 }
 
