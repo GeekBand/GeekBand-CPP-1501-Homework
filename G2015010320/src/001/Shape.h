@@ -6,7 +6,7 @@ private:
   const int no;
 private:
   static int count;
-protected:
+public:
   virtual ~Shape() { }
 
 public:
