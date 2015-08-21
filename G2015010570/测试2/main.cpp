@@ -43,6 +43,8 @@ int main(int argc, char** argv) {
 		}
 	}
 	delete[] shapes;
+
+	return 0;
 }
 
 inline int getRandom() {
