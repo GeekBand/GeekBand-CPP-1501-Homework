@@ -8,6 +8,8 @@ class Point
 {
 	int x;
 	int y;
+public:
+	Point(int x, int y) : x(x), y(y) {}
 };
 class Rectangle : public Shape
 {
