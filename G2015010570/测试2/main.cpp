@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 
 	Shape** shapes = new Shape*[ARRAY_LENGTH];
 
-	srand(time(NULL));
+	srand((unsigned)time(NULL));
 
 	for (int i = 0; i < 10; i++) {
 		shapes[i] = new Rectangle(i, getRandom(), getRandom(), getRandom(),
