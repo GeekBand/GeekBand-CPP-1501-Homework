@@ -149,7 +149,7 @@ int main()
    }
 
    std::cout << "Large than 50 items:\n";
-   while( k > 1 )
+   while( k > 0 )
    {
       k--;
       std::cout << resultArray[k]->getNo() << ':' << resultArray[k]->getArea() << '\n';
