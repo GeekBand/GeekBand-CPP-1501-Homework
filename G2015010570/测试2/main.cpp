@@ -39,6 +39,7 @@ int main(int argc, char** argv) {
 					<< shapes[i]->getArea() << endl;
 
 			delete shapes[i];
+			shapes[i] = NULL;
 		}
 	}
 	delete[] shapes;
