@@ -8,7 +8,7 @@ class Rectangle: public Shape
 {
 public:
     // Constructor
-    Rectangle(int _width = 0, int _height = 0, int _x, int _y, int _no): width(_width), height(_height), leftUp(new Point(_x, _y)), Shape(_no) { }
+    Rectangle(int _width = 0, int _height = 0, int _x = 0, int _y = 0, int _no = 0): width(_width), height(_height), leftUp(new Point(_x, _y)), Shape(_no) { }
     
     /*  --------------------  BIG THREE  -----------------------  */
     
@@ -31,7 +31,7 @@ private:
 
 inline
 Rectangle::Rectangle (const Rectangle& other):
-    Shape(other), width(other.width), height(other.height)
+Shape(other), width(other.width), height(other.height)
 {
     if (other.leftUp != nullptr) {
         this->leftUp = new Point(*other.leftUp); // call copy ctr of Point
@@ -47,9 +47,9 @@ Rectangle& Rectangle::operator = (const Rectangle& other)
 {
     if (this == &other)
         return *this;
-
+    
     this->Shape::operator=(other);
-
+    
     this->width = other.w();
     this->height = other.h();
     
@@ -62,7 +62,7 @@ Rectangle& Rectangle::operator = (const Rectangle& other)
     else {
         delete leftUp;
     }
-
+    
     return *this;
 }
 
