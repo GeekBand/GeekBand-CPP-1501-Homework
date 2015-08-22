@@ -8,8 +8,6 @@ public:
 	{
 	}
 
-	Point(const Point &p);
-	~Point();
 
 	int getX() const { return x; }
 	int getY() const { return y; }
@@ -20,14 +18,3 @@ private:
 
 #endif
 
-inline
-Point::Point(const Point &p)
-{
-	this->x = p.x;
-	this->y = p.y;
-}
-
-inline 
-Point::~Point()
-{
-}

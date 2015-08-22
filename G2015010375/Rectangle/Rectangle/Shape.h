@@ -8,19 +8,10 @@ public:
 	{
 	}
 
-	virtual ~Shape();
-
-	int getNo() const { return no; }
-
-	virtual void setNo(int no) { this->no = no; }
+	virtual ~Shape() {}
 
 private:
 	int no;
 };
 
 #endif
-
-inline
-Shape::~Shape()
-{
-}

@@ -7,21 +7,13 @@
 class Rectangle :public Shape
 {
 public:
-	Rectangle(int width, int height, int x, int y) :width(width), height(height)
+	Rectangle(int width, int height, int x, int y) :width(width), height(height), leftUp(new Point(x, y))
 	{
-		leftUp = new Point(x, y);
 	}
 
 	Rectangle(const Rectangle& other);
 	Rectangle& operator=(const Rectangle& other);
 	~Rectangle();
-
-	int getWidth() const { return width; }
-	int getHeight() const { return height; }
-	Point getPoint() const { return *leftUp; }
-	void setPoint(const Point &p);
-
-	static void copy(Rectangle* r1, const Rectangle& r2);
 
 private:
 	int width, height;
@@ -29,36 +21,17 @@ private:
 };
 
 #endif
-
-inline void
-Rectangle::copy(Rectangle* r1, const Rectangle& r2)
+inline
+Rectangle::Rectangle(const Rectangle& other) :Shape(other), width(other.width), height(other.height)
 {
-	r1->width = r2.width;
-	r1->height = r2.height;
-
-	if (r1->leftUp == r2.leftUp)
-		return;
-
-	if (r2.leftUp == 0)
+	if (other.leftUp == nullptr)
 	{
-		delete r1->leftUp;
-		return;
-	}
-
-	if (r1->leftUp == 0)
-	{
-		r1->leftUp = new Point(*r2.leftUp);
+		leftUp = nullptr;
 	}
 	else
 	{
-		*r1->leftUp = *r2.leftUp;
+		leftUp = new Point(*other.leftUp);
 	}
-}
-
-inline
-Rectangle::Rectangle(const Rectangle& other)
-{
-	Rectangle::copy(this, other);
 }
 
 inline Rectangle&
@@ -67,9 +40,20 @@ Rectangle::operator=(const Rectangle& other)
 	if (this == &other)
 		return *this;
 
-	delete this->leftUp;
-	this->leftUp = 0;
-	Rectangle::copy(this, other);
+	this->Shape::operator=(other);
+
+	if (other.leftUp != nullptr && leftUp != nullptr)
+	{
+		*leftUp = *other.leftUp;
+	}
+	else if (other.leftUp == nullptr)
+	{
+		delete leftUp;
+	}
+	else
+	{
+		leftUp = new Point(*other.leftUp);
+	}
 
 	return *this;
 }
@@ -78,18 +62,4 @@ inline
 Rectangle::~Rectangle() {
 	delete this->leftUp;
 }
-
-inline void
-Rectangle::setPoint(const Point &p)
-{
-	if (this->leftUp == 0)
-	{
-		this->leftUp = new Point(p);
-	}
-	else
-	{
-		*this->leftUp = p;
-	}
-}
-
 
