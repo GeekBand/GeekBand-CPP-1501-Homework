@@ -3,7 +3,7 @@
 #include "shape.h"
 
 inline
-Rectangle::Rectangle( int width, int height, int x, int y)
+Rectangle::Rectangle( int width, int height, int x, int y )
 {
     leftUp = new Point( x, y );
 
