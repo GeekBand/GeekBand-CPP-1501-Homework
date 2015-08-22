@@ -3,7 +3,7 @@
 
 class Point {
 public:
-    Point(int x = 0, int y = 0): x(x), y(y) { };
+    Point(int _x = 0, int _y = 0): x(_x), y(_y) { };
     Point(const Point& other);
     Point& operator = (const Point& other);
     ~Point() { };
@@ -13,13 +13,6 @@ private:
     int x;
     int y;
 };
-
-inline
-Point::Point(const Point& other)
-{
-    x = other.x;
-    y = other.y;
-}
 
 inline
 Point& Point::operator = (const Point& other)

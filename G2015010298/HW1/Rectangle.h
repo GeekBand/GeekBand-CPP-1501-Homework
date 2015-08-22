@@ -8,10 +8,7 @@ class Rectangle: public Shape
 {
 public:
     // Constructor
-    Rectangle(int width, int height, int x, int y):
-        Shape(),
-        width(width > 0 ? width : 0), height(height > 0 ? height : 0),
-        leftUp(new Point(x, y)) { };
+    Rectangle(int _width = 0, int _height = 0, int _x, int _y, int _no): width(_width), height(_height), leftUp(new Point(_x, _y)), Shape(_no) { }
     
     /*  --------------------  BIG THREE  -----------------------  */
     
@@ -20,7 +17,7 @@ public:
     // Copy Assignment Operator
     Rectangle& operator = (const Rectangle& other);
     // Deconstructor
-    ~Rectangle() { };
+    ~Rectangle() { delete leftUp; leftUp = nullptr; }
     
     // Getter
     Point* getleftup() const { return leftUp; }
@@ -36,8 +33,9 @@ inline
 Rectangle::Rectangle (const Rectangle& other):
     Shape(other), width(other.width), height(other.height)
 {
-    if (this->leftUp != nullptr) {
-        this->leftUp = new Point(*other.leftUp);
+    if (other.leftUp != nullptr) {
+        this->leftUp = new Point(*other.leftUp); // call copy ctr of Point
+                                                 // immune for future Point changes
     }
     else {
         this->leftUp = nullptr;
@@ -49,10 +47,22 @@ Rectangle& Rectangle::operator = (const Rectangle& other)
 {
     if (this == &other)
         return *this;
-    
-    *(this->leftUp) = *(other.leftUp); // Determined by copy op= implement in Point Class
+
+    this->Shape::operator=(other);
+
     this->width = other.w();
     this->height = other.h();
+    
+    if (this->leftUp != nullptr && other.leftUp != nullptr) {
+        *this->leftUp = *other.leftUp;  // call copy op= of Class Point
+    }
+    else if (this->leftUp == nullptr && other.leftUp != nullptr) {
+        this->leftUp = new Point(*other.leftUp);
+    }
+    else {
+        delete leftUp;
+    }
+
     return *this;
 }
 
