@@ -11,8 +11,10 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	Point pa(4,5);
 	//cout << "a: " << pa.get_x() << "," << pa.get_y() << endl;
-	Point pb=pa;
+	Point pb = pa;
 	//cout << "b: " << pb.get_x() << "," << pb.get_y() << endl;
+	Point pc(pa);
+	cout << "c: " << pc.get_x() << "," << pc.get_y() << endl;
 		
 	Rectangle R1(3,4,5,6);
 	cout << "R1 : " << R1 << endl;	
