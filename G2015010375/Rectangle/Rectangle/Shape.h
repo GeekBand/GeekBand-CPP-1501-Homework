@@ -8,7 +8,7 @@ public:
 	{
 	}
 
-	~Shape();
+	virtual ~Shape();
 
 	int getNo() const { return no; }
 
