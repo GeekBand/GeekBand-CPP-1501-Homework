@@ -33,12 +33,15 @@ private:
 };
 
 inline
-Rectangle::Rectangle (const Rectangle& other)
+Rectangle::Rectangle (const Rectangle& other):
+    Shape(other), width(other.width), height(other.height)
 {
-    Shape();
-    width = other.width;
-    height = other.height;
-    leftUp = new Point(other.leftUp->xVal(), other.leftUp->yVal());
+    if (this->leftUp != nullptr) {
+        this->leftUp = new Point(*other.leftUp);
+    }
+    else {
+        this->leftUp = nullptr;
+    }
 }
 
 inline
