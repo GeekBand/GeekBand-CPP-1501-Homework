@@ -51,6 +51,11 @@ int main(int argc, const char * argv[]) {
     // delete memory allocated before
     for (int i = 0; i < n; ++i) {
         delete arr[i];
+        arr[i] = nullptr;
     }
+    // since arr and arr2 are HEAP variable, need delete
+    delete[] arr;
+    delete[] arr2;
+
     return 0;
 }

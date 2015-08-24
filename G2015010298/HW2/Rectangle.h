@@ -1,5 +1,5 @@
-#ifndef __RECTANGLE__
-#define __RECTANGLE__
+#ifndef __XUN_RECTANGLE__
+#define __XUN_RECTANGLE__
 
 #include "Shape.h"
 #include "Point.h"
