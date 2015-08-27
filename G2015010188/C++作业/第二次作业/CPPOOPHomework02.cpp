@@ -59,10 +59,10 @@ int main() {
 	}
 
 	//ÊÍ·ÅÄÚ´æ
-	Shape **pShapes = shapes;
-
-	delete[] pShapes;
-	pShapes = nullptr;
+	for (int i = 0; i < 20; ++i) {
+		delete shapes[i];
+		shapes[i] = nullptr;
+	}
 	delete[] TrueShapes;
 	TrueShapes = nullptr;
 	getchar();
