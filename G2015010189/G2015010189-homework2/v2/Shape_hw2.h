@@ -6,8 +6,8 @@ private:
 	int no;
 public:
 	Shape(int no): no(no){}
-	virtual int getArea()=0;
-	virtual ~Shape(){};
+	virtual const int getArea()=0;
+	virtual ~Shape(){}
 };
 
 class Point
@@ -17,12 +17,6 @@ private:
 	int y;
 public:
 	Point(int x=0,int y=0):x(x), y(y){}
-	Point& operator = (const Point& p)
-	{
-		x=p.x;
-		y=p.y;
-		return *this;
-	}
 };
 
 class Rectangle: public Shape
@@ -34,9 +28,9 @@ private:
 public:
 	Rectangle(int no, int width, int height, Point& point):Shape(no), width(width), height(height), leftUp(point)
 	{}
-	virtual int getArea()
+	virtual const int getArea()
 	{
-		return width*height;
+		return width * height;
 	}
 };
 
@@ -46,8 +40,9 @@ private:
 	Point center;
 	int radius;
 public:
-	Circle(int no, int r, Point& p):Shape(no), radius(r), center(p){}
-	virtual int getArea()
+	Circle(int no, int r, Point& p):Shape(no), radius(r), center(p)
+	{}
+	virtual const int getArea()
 	{
 		return pi * radius * radius;
 	}
