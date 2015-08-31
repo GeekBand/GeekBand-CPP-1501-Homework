@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //
 //  Shape.h
 //  G2015010400
@@ -27,3 +28,4 @@ private:
 int Shape::count = 1;
 
 #endif
+

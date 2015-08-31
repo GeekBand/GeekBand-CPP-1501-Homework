@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //
 //  Point.h
 //  G2015010400
@@ -27,3 +28,4 @@ inline int gety(const Point& point){
 }
 
 #endif
+

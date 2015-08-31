@@ -2,6 +2,7 @@
 #define RECTANGLE_H_
 
 #include "Shape.h"
+#include "Point.h"
 
 class Rectangle: public Shape {
 public:

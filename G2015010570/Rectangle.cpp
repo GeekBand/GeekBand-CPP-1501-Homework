@@ -16,6 +16,17 @@ Rectangle::Rectangle(const Rectangle& other):Shape(other.no) {
 	this->leftUp = new Point(other.getX(), other.getY());
 }
 
+Rectangle& Rectangle::operator=(const Rectangle& other) {
+	if (this == &other) {
+		return *this;
+	}
+	this->width = other.width;
+	this->height = other.height;
+	delete this->leftUp;
+	this->leftUp = new Point(other.getX(), other.getY());
+	return *this;
+}
+
 void Rectangle::setHeight(int height) {
 	this->height = height;
 }

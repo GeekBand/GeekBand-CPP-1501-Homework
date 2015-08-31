@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //
 //  Rectangle.h
 //  G2015010400
@@ -72,3 +73,4 @@ inline ostream& operator<<(ostream& os, const Rectangle& other)
     return os;
 }
 #endif
+
