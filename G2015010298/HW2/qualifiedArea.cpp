@@ -9,8 +9,6 @@
 #include <time.h>       /* time */
 #include "Rectangle.h"
 #include "Circle.h"
-#include "Shape.h"
-#include "Point.h"
 
 using namespace std;
 
@@ -46,16 +44,18 @@ int main(int argc, const char * argv[]) {
         }
     }
     // print out qualified shapes
-    cout << "\n\nQualified Shapes with area larger than 50: " << endl;
+    cout << "\n\nQualified Shapes with area larger than 50: \n" << endl;
     for (int i = 0; i < qualified; ++i) {
         cout << "Shape " << i + 1 << ". Area: " << arr2[i]->getArea() << endl;
     }
     // delete memory allocated before
     for (int i = 0; i < n; ++i) {
         delete arr[i];
+        arr[i] = nullptr;
     }
-    for (int i = 0; i < qualified; ++i) {
-        delete arr2[i];
-    }
+    // since arr and arr2 are HEAP variable, need delete
+    delete[] arr;
+    delete[] arr2;
+
     return 0;
 }
