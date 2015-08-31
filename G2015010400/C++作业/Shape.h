@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //
 //  Shape.h
 //  G2015010400
@@ -11,9 +12,20 @@
 
 class Shape{
 public:
-    Shape():no(0){}
+    Shape(){
+        no = count++;
+    }
     int getno() const { return no;}
+    virtual ~Shape(){ count--; }
+    
+    static int count;
+    
 private:
     int no;
+    
 };
+
+int Shape::count = 1;
+
 #endif
+
