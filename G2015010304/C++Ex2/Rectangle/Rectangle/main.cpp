@@ -21,7 +21,7 @@ void shapeInit(Shape** shape, int size)
 
 Shape** selectArea50(Shape** shape, int size, int& count)
 {
-	Shape** shapeArea50;
+	Shape** shapeArea50 =NULL;
 	int num = 0;
 	int delNum = 0;
 	for (int i = 0; i < size; i++) {
@@ -34,7 +34,9 @@ Shape** selectArea50(Shape** shape, int size, int& count)
 			num++;
 		}
 	}
-
+	if (num == 0) {
+		return NULL;
+	}
 	shapeArea50 = new Shape*[num];
 	for (int i = 0; i < num; i++) {
 		shapeArea50[i] = shape[i];
@@ -63,6 +65,7 @@ int main()
 		cout <<"size:"<<shapeArea50[i]->getArea() << endl;
 	}
 	shapeDel(shape, count);
-	delete[] shapeArea50;
+	if (shapeArea50)
+		delete[] shapeArea50;
 	return 0;
 }

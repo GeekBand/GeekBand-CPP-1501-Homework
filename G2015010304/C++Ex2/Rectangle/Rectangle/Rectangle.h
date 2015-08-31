@@ -5,6 +5,7 @@ class Shape
 	int no;
 public:
 	virtual int getArea() = 0;
+	virtual ~Shape(){}
 	void setNo(int _no) { no = _no; }
 };
 class Point
