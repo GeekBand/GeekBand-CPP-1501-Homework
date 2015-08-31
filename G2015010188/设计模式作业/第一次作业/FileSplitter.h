@@ -9,19 +9,16 @@ class FileSplitter {
 	string filePath;
 	int fileNumber;
 
-	//½ø¶È
-	int processValue;
-
-	MainForm *form;
+	void (*Update)(int);
 protected:
-	void setProcessValue(int value) {
-		processValue = value;
-	}
-	void NotificationUpdate() {
-		if (form != nullptr) {
-			form->UpdateProgressBar(processValue);
+	void NotificationUpdate(int processValue) {
+		if (Update != nullptr) {
+			Update(processValue);
 		}
 	}
+public:
+	FileSplitter(string& _filepath, int _filenumber, void(*updateFun)(int)) :
+		filePath(_filepath), fileNumber(_filenumber), Update(updateFun) {}
 
 public:
 	virtual void Split() = 0;
