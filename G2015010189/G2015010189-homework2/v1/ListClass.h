@@ -26,12 +26,13 @@ template <typename T> struct ListNode
 	 ListNode<T>* operator[](int r)const;
 	 ListNode<T>* insertElement(T const& e);
 	 T removeElement(ListNode<T>* p);
+	 int get_size(){ return _size; }
  };
 
  template <typename T> void List<T>::init()
  {
-	 ListHeader = new ListNode<T>;
-	 trailer = new ListNode<T>;
+	 ListHeader = new ListNode<T>(0);
+	 trailer = new ListNode<T>(0);
 	 ListHeader->succ = trailer;
 	 ListHeader->pred = nullptr;
 	 trailer->pred = ListHeader;
@@ -42,7 +43,8 @@ template <typename T> struct ListNode
  template <typename T> ListNode<T>* List<T>::operator[](int r)const
  {
 	 ListNode<T>* p = first();
-	 while(0<r--) p = p->succ;
+	 while(0<r--) 
+		 p = p->succ;
 	 return p;
  }
 
@@ -53,6 +55,7 @@ template <typename T> struct ListNode
 	 trailer->pred->succ = x;
 	 trailer->pred = x;
 	 x->succ = trailer;
+	 _size++;
 	 return x;
  }
 
@@ -63,7 +66,7 @@ template <typename T> struct ListNode
 	 p->succ->pred = p->pred;
 	 delete p;
 	 _size--;
-	 return e;
+     return e;
  }
 
 
@@ -76,7 +79,20 @@ template <typename T> struct ListNode
 
  template <typename T> List<T>::~List()
  {
+	 if(trailer->data !=  ListHeader->data)
+	 {
 	 clear();
+	 }
+	 if(ListHeader->pred  != ListHeader->succ)
+	 {
 	 delete ListHeader;
+	 ListHeader = nullptr;
+	 }
+	 if(trailer->pred !=  trailer->succ)
+	 {
 	 delete trailer;
+	 trailer = nullptr;
+	 }
+	 
+	 _size = 0;
  }
