@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #ifndef __PONIT__
 #define __PONIT__
 
@@ -17,4 +18,5 @@ private:
 };
 
 #endif
+
 

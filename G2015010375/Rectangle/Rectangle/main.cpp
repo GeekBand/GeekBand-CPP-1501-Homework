@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <iostream>
 
 #include "Rectangle.h"
@@ -11,4 +12,5 @@ void main()
 	Point p(3, 3);
 
 	
+
 }

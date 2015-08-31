@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #ifndef __SHAPE__
 #define __SHAPE__
 

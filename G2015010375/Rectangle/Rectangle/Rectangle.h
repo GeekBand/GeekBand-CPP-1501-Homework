@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #ifndef __RECTANGLE__
 #define __RECTANGLE__
 
