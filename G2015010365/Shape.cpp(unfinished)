@@ -1,0 +1,40 @@
+#define PI 3.1415926
+
+class Shape
+{
+	int no;
+public:
+	virtual int getArea()=0;
+	
+};
+
+class Point
+{
+	int x;
+	int y;
+};
+
+class Rectangle: public Shape
+{
+	int width;
+	int height;
+	
+	Point leftUp;
+public:
+	inline virtual int getArea()
+	{
+		return width*height;
+	}
+}
+
+class Circle: public Shape
+{
+	Point center;
+	int radius;
+	
+public:
+	inline virtual int getArea()
+	{
+		return (int)( PI * radius * radius);
+	}
+}

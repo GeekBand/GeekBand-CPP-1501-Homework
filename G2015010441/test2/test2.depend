@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1439884699 source:e:\test\test2\src\main.cpp
+	"Shape.h"
+	<ctime>
+	<cstdlib>
+
+1439884770 e:\test\test2\include\shape.h
+	<ctime>
+	<cstdlib>
+	<iostream>
+
+1439885253 source:e:\test\test2\src\shape.cpp
+	"Shape.h"
+
+1439994369 source:e:\mystudy\c++\极客班线上课程听课笔记\test2\src\shape.cpp
+	"Shape.h"
+
+1439994184 e:\mystudy\c++\极客班线上课程听课笔记\test2\include\shape.h
+	<ctime>
+	<cstdlib>
+	<iostream>
+
