@@ -1,0 +1,26 @@
+class SplitStrategy{
+public:
+    virtual void doSplit(FileSplitter& fileSplitter)=0;
+    virtual ~SplitStrategy(){}
+};
+
+class SplitStrategy1 : public SplitStrategy{
+public:
+    virtual void doSplit(FileSplitter& fileSplitter){
+        //***********
+    }
+};
+
+class SplitStrategy2 : public SplitStrategy{
+public:
+    virtual void doSplit(FileSplitter& fileSplitter){
+        //***********
+    }
+};
+
+class SplitStrategy3 : public SplitStrategy{
+public:
+    virtual void doSplit(FileSplitter& fileSplitter){
+        //***********
+    }
+};
