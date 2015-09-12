@@ -60,5 +60,4 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (int i = 0; i < a; i++){
 		delete p[i];
 	}
-	delete [] p;
 }
