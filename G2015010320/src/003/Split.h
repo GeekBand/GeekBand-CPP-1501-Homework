@@ -18,7 +18,8 @@ class Split
 protected:
   std::string filePath_;
   Split(const std::string &filePath) : filePath_(filePath) { }
-  virtual ~Split() { }
+public:
+  virtual ~Split() { std::cout << "[Split] dtor" << std::endl; }
 public:
   std::string getFile() const {
     return filePath_;
@@ -48,6 +49,9 @@ public:
   }
 };
 
+// TODO: you can implement the others,
+// such as TowSplit, ThreeSplit ...
+
 // a simple factory class to create 
 // the specific spliter
 class Splits
@@ -68,14 +72,18 @@ public:
 };
 
 // bridge/delegate the progess issue to a handler
-class SplitHandler
+class SplitHandler : public ProgressIndicator
 {
+public:
   virtual void start() = 0;
+
+public:
+  virtual ~SplitHandler() {}
 };
 
 // one synchronize impl of split handler
 // note: this class will hand over the life of split
-class SycnSplitHanler : public ProgressIndicator
+class SycnSplitHanler : public SplitHandler
 {
 private:
   ProgressBar * const bar_;
@@ -104,5 +112,19 @@ public:
   }
 };
 
+
+// a simple factory class to create 
+// the default split progress handler
+class Handlers
+{
+private:
+  explicit Handlers() { }
+
+public:
+  static SplitHandler * of(ProgressBar *bar, ObservableSplit *split) {
+    return new SycnSplitHanler(bar, split);
+  }
+
+};
 
 #endif // __SPLIT_H__

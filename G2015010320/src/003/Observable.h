@@ -32,7 +32,7 @@ protected:
     }
   }
   
-  virtual ~Observable() {}
+  virtual ~Observable() { std::cout << "[Observable] dtor" << std::endl; }
 
 public:
   void regist(ProgressIndicator *o) {

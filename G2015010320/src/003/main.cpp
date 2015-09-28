@@ -2,6 +2,7 @@
 
 #include "Window.h"
 #include "Split.h"
+#include <memory>
 
 class MainForm : public Form
 {
@@ -14,9 +15,8 @@ public:
 
 public:
   void SplitBtnClicked() {
-  	SycnSplitHanler spliter(
-      &indicator_, Splits::create(One, fileInput_.text()));
-  	spliter.start();
+    std::auto_ptr<SplitHandler> holder(Handlers::of(&indicator_, Splits::create(One, fileInput_.text())));
+  	holder->start();
   }
 };
 
