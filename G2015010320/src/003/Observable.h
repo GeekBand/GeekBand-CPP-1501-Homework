@@ -45,11 +45,12 @@ public:
 
   void remove(ProgressIndicator *o) {
     // for thread safe, should synchronize this.
-    std::cout << "[Observable] " << "remove \t" << o->name() << std::endl;
     const std::vector<ProgressIndicator *>::iterator position = 
       std::find(obsevers.begin(), obsevers.end(), o);
-    if (position != obsevers.end())
+    if (position != obsevers.end()) {
+      std::cout << "[Observable] " << "remove \t" << o->name() << std::endl;
       obsevers.erase(position);
+    }
   }
 };
 

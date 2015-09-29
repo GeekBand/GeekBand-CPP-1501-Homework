@@ -113,6 +113,9 @@ public:
 
     std::cout << "[Handler] " << "start split \t" << split_->getFile() << std::endl;
   	split_->split();
+    
+    // after completed, remove this.
+    split_->remove(this);
   }
 
   void report(int size, int totalSize) {
