@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <string>
 
 // progress indicator to report the progress, which should 
 // derived from this interface and regist to an Observable class.
@@ -10,6 +11,7 @@ class ProgressIndicator
 {
 public:
   virtual void report(int size, int totalSize) = 0;
+  virtual std::string name() const = 0;
 protected:
   virtual ~ProgressIndicator() {}
 };
@@ -37,13 +39,13 @@ protected:
 public:
   void regist(ProgressIndicator *o) {
     // for thread safe, should synchronize this.
-    std::cout << "[Observable] " << "regist" << std::endl;
+    std::cout << "[Observable] " << "regist \t" << o->name() << std::endl;
     obsevers.push_back(o);
   }
 
   void remove(ProgressIndicator *o) {
     // for thread safe, should synchronize this.
-    std::cout << "[Observable] " << "remove" << std::endl;
+    std::cout << "[Observable] " << "remove \t" << o->name() << std::endl;
     const std::vector<ProgressIndicator *>::iterator position = 
       std::find(obsevers.begin(), obsevers.end(), o);
     if (position != obsevers.end())

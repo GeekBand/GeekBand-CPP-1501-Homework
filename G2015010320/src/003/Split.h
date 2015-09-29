@@ -18,6 +18,7 @@ class Split
 protected:
   std::string filePath_;
   Split(const std::string &filePath) : filePath_(filePath) { }
+
 public:
   virtual ~Split() { std::cout << "[Split] dtor" << std::endl; }
 public:
@@ -68,7 +69,6 @@ public:
         return NULL;
     }
   }
-  
 };
 
 // bridge/delegate the progess issue to a handler
@@ -76,6 +76,9 @@ class SplitHandler : public ProgressIndicator
 {
 public:
   virtual void start() = 0;
+  std::string name() const {
+    return "split handler";
+  }
 
 public:
   virtual ~SplitHandler() {}
@@ -83,26 +86,31 @@ public:
 
 // one synchronize impl of split handler
 // note: this class will hand over the life of split
-class SycnSplitHanler : public SplitHandler
+class SyncSplitHanler : public SplitHandler
 {
 private:
   ProgressBar * const bar_;
   ObservableSplit * const split_;
 
 public:
-  explicit SycnSplitHanler(ProgressBar *bar, ObservableSplit *split) :
+  explicit SyncSplitHanler(ProgressBar *bar, ObservableSplit *split) :
     bar_(bar), split_(split)
   {
     assert (bar != NULL && split != NULL);
-    split_->regist(this);
-    std::cout << "[Handler] " << "created" << std::endl;
+    // it's not good practice, since `this` escaped from ctor.
+    // we have moved this regist action to start function
+    // split_->regist(this); 
+    std::cout << "[Handler] " << "created \t"  << this->name() << std::endl;
   }
-  
-  virtual ~SycnSplitHanler() {
+
+  virtual ~SyncSplitHanler() {
     delete split_;
   }
 
   void start() {
+    // before starting to split, regist this.
+    split_->regist(this);
+
     std::cout << "[Handler] " << "start split \t" << split_->getFile() << std::endl;
   	split_->split();
   }
@@ -111,7 +119,6 @@ public:
     bar_->set(size, totalSize);
   }
 };
-
 
 // a simple factory class to create 
 // the default split progress handler
@@ -122,9 +129,8 @@ private:
 
 public:
   static SplitHandler * of(ProgressBar *bar, ObservableSplit *split) {
-    return new SycnSplitHanler(bar, split);
+    return new SyncSplitHanler(bar, split);
   }
-
 };
 
 #endif // __SPLIT_H__

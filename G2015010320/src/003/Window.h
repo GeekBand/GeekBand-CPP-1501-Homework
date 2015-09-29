@@ -12,7 +12,8 @@ public:
    explicit Form(std::string title) {
     std::cout << "[GUI Window] A form window created and showing - " << title << std::endl;
   }
-protected:
+
+public:
   virtual ~Form() { }
 };
 
@@ -22,6 +23,9 @@ class TextBox
 {
 public:
   std::string text() const { return "/tmp/bigfile.data"; }
+  
+public:
+  virtual ~TextBox() { }
 };
 
 // A dummy progress bar class,
@@ -32,6 +36,9 @@ public:
   void set(int size, int totalSize) { 
     std::cout << "[GUI Bar] " << (float)size/totalSize*100 << " %" << std::endl;
   }
+
+public:
+  virtual ~ProgressBar() { }
 };
 
 #endif // __WINDWOW_H__

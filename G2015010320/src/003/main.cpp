@@ -16,7 +16,7 @@ public:
 public:
   void SplitBtnClicked() {
     std::auto_ptr<SplitHandler> holder(Handlers::of(&indicator_, Splits::create(One, fileInput_.text())));
-  	holder->start();
+    holder->start();
   }
 };
 
