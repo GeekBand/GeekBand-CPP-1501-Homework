@@ -14,7 +14,9 @@ public:
   }
 
 public:
-  virtual ~Form() { }
+  virtual ~Form() { 
+    std::cout << "[GUI Window] \tdtor" << std::endl;
+  }
 };
 
 // A dummy text box class,
@@ -34,7 +36,7 @@ class ProgressBar
 {
 public:
   void set(int size, int totalSize) { 
-    std::cout << "[GUI Bar] " << (float)size/totalSize*100 << " %" << std::endl;
+    std::cout << "[GUI Bar] \t" << (float)size/totalSize*100 << " %" << std::endl;
   }
 
 public:

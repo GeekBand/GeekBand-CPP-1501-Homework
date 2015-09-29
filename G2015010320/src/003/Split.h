@@ -20,7 +20,7 @@ protected:
   Split(const std::string &filePath) : filePath_(filePath) { }
 
 public:
-  virtual ~Split() { std::cout << "[Split] dtor" << std::endl; }
+  virtual ~Split() { std::cout << "[Split] \tdtor" << std::endl; }
 public:
   std::string getFile() const {
     return filePath_;
@@ -40,11 +40,15 @@ protected:
 class OneSplit : public ObservableSplit
 {
 public:
-  OneSplit(const std::string &filePath) : ObservableSplit(filePath) { }
+  OneSplit(const std::string &filePath) : ObservableSplit(filePath) { 
+    std::cout << "[Split] " << "\tcreated \tOne" << std::endl;
+  }
   void split() {
+    // `10` is a magic number, just for simpfy the demostration.
+    std::cout << "[Split] " << "\tjob start with totalSize " << 10 << std::endl;
     for (int step = 0; step < 10; ++step) {
       // one dummy split operation
-      std::cout << "[Split] " << "make job " << step+1 << std::endl;
+      std::cout << "[Split] " << "\tjob done \t" << step+1 << std::endl;
       notifyAll(step+1, 10);
     }
   }
@@ -77,7 +81,7 @@ class SplitHandler : public ProgressIndicator
 public:
   virtual void start() = 0;
   std::string name() const {
-    return "split handler";
+    return "split-handler";
   }
 
 public:
@@ -100,18 +104,19 @@ public:
     // it's not good practice, since `this` escaped from ctor.
     // we have moved this regist action to start function
     // split_->regist(this); 
-    std::cout << "[Handler] " << "created \t"  << this->name() << std::endl;
+    std::cout << "[Handler] " << "\tcreated \t"  << this->name() << std::endl;
   }
 
   virtual ~SyncSplitHanler() {
     delete split_;
+    std::cout << "[Handler] " << "\tdtor"  << std::endl;
   }
 
   void start() {
     // before starting to split, regist this.
     split_->regist(this);
 
-    std::cout << "[Handler] " << "start split \t" << split_->getFile() << std::endl;
+    std::cout << "[Handler] " << "\tstart split \t" << split_->getFile() << std::endl;
   	split_->split();
     
     // after completed, remove this.

@@ -34,12 +34,12 @@ protected:
     }
   }
   
-  virtual ~Observable() { std::cout << "[Observable] dtor" << std::endl; }
+  virtual ~Observable() { std::cout << "[Observable] \tdtor" << std::endl; }
 
 public:
   void regist(ProgressIndicator *o) {
     // for thread safe, should synchronize this.
-    std::cout << "[Observable] " << "regist \t" << o->name() << std::endl;
+    std::cout << "[Observable] " << "\tregisted \t"  << o->name() << std::endl;
     obsevers.push_back(o);
   }
 
@@ -48,7 +48,7 @@ public:
     const std::vector<ProgressIndicator *>::iterator position = 
       std::find(obsevers.begin(), obsevers.end(), o);
     if (position != obsevers.end()) {
-      std::cout << "[Observable] " << "remove \t" << o->name() << std::endl;
+      std::cout << "[Observable] " << "\tremoved \t" << o->name() << std::endl;
       obsevers.erase(position);
     }
   }
