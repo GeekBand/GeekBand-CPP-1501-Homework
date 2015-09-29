@@ -5,6 +5,27 @@
 #include <iostream>
 #include <assert.h>
 
+void initShapes(Shape **shapes, int size)
+{
+  const int SIZE = size;
+  for (int i = 0; i < SIZE; ++i) {
+    if (i % 2 == 0) {
+      shapes[i] = new Rectangle(
+        (rand() % 10) + 1 // width must be gt than 1
+        , (rand() % 10) + 1 // height must be gt than 1
+        , (rand() % 10)
+        , (rand() % 10)
+        , i+1);
+    } else {
+      shapes[i] = new Circle(
+        (rand() % 10) + 1 // radius must be gt than 1
+        , (rand() % 10)
+        , (rand() % 10)
+        , i+1);
+    }
+  }
+}
+
 // delete the shape which area is less than specific value,
 // and shift all the elements after the item deleted to their left positions.
 Shape **deleteLessThanArea(Shape **shapes, int size, int area)
@@ -49,7 +70,6 @@ void clean(Shape **shapes, int size)
       delete shapes[i];
     }
   }
-  delete[] shapes;
 }
 
 #include <stdio.h>
@@ -60,35 +80,19 @@ int main() {
   // It's not a good practice.
   // The raw point should be treated with RAII method,
   // so std::list<std::scoped_ptr<Shape>> is preferred.
-  Shape **shapes = new Shape*[SIZE];
+  Shape *shapes[SIZE] = { NULL };
   srand((unsigned)time(0));
-
-
-  for (int i = 0; i < SIZE; ++i) {
-    if (i % 2 == 0) {
-      shapes[i] = new Rectangle(
-        (rand() % 10) + 1 // width must be gt than 1
-        , (rand() % 10) + 1 // height must be gt than 1
-        , (rand() % 10)
-        , (rand() % 10)
-        , i+1);
-    } else {
-      shapes[i] = new Circle(
-        (rand() % 10) + 1 // radius must be gt than 1
-        , (rand() % 10)
-        , (rand() % 10)
-        , i+1);
-    }
-  }
+  initShapes(shapes, SIZE);
 
   std::cout << "Sample data: \n"
     << "---------------------" << std::endl;
   print(shapes, SIZE);
+
   deleteLessThanArea(shapes, SIZE, 50);
   std::cout << "\nAfter delete area value less than 50\n"
     << "---------------------" << std::endl;
   print(shapes, SIZE);
-  
+
   std::cout << "clean all elements and exit" 
     << std::endl;
   clean(shapes, SIZE);
