@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <string>
 
-// progress indicator to report the progress, which should 
+// progress indicator to report the progress status, which should 
 // derived from this interface and regist to an Observable class.
 class ProgressIndicator
 {
@@ -13,7 +13,7 @@ public:
   virtual void report(int size, int totalSize) = 0;
   virtual std::string name() const = 0;
 protected:
-  virtual ~ProgressIndicator() {}
+  virtual ~ProgressIndicator() { }
 };
 
 // observable utility class, it provides the regist and remove 

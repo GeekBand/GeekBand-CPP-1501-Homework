@@ -4,8 +4,7 @@
 #include <string>
 #include <iostream>
 
-// A dummy base form class,
-// just let compiler happy.
+// A dummy base form class
 class Form
 {
 public:
@@ -19,19 +18,18 @@ public:
   }
 };
 
-// A dummy text box class,
-// just let compiler happy.
+// A dummy text box class
 class TextBox
 {
 public:
   std::string text() const { return "/tmp/bigfile.data"; }
-  
+  int number() const { return 10; }
+
 public:
   virtual ~TextBox() { }
 };
 
-// A dummy progress bar class,
-// just let compiler happy.
+// A dummy progress bar class
 class ProgressBar
 {
 public:
