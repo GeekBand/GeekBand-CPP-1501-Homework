@@ -20,4 +20,6 @@ int main()
   // update the 2nd point of pg2
   pg2.at(1) = Point(100, 100); 
   std::cout << pg2 << std::endl;
+
+  return 0;
 }

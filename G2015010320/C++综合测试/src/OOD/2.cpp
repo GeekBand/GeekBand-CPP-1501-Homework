@@ -25,4 +25,6 @@ int main()
   op.setValue(newValue);
 
   std::cout << op.getValue() << std::endl;
+
+  return 0;
 }

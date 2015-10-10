@@ -65,9 +65,11 @@ private: // some helper methods
 inline std::ostream &
 operator<< (std::ostream &os, const Polygon &pg) {
   os << "[Polygon " << pg.id() << " : ";
+  char dm[3] = { '\0', ' ', '\0' };
   for (int i = 0; i < pg.points().size(); ++i) {
     const Point *p = pg.points().at(i);
-    os << *p << ", ";
+    os << dm << *p;
+    dm[0] = ',';
   }
   os << " ]";
   return os;
