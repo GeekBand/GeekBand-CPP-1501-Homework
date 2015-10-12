@@ -1,9 +1,8 @@
 // The entry point of Question 2 of STL
 
-#include <vector>
+#include <set>
 #include <iostream>
 #include <string>
-#include <set>
 #include <cassert>
 
 // define an Programmer
@@ -89,7 +88,7 @@ initArr(const Programmer *ps[]) {
   ps[1] = new Programmer(2, "Martin Fowler");
   ps[2] = new Programmer(3, "Bill Gates");
   ps[3] = new Programmer(4, "P.J. Plaught");
-  ps[4] = new Programmer(5, "Stanley B. Lippman");
+  ps[4] = new Programmer(4, "Stanley B. Lippman"); // emulate id conflicts
   ps[5] = new Programmer(6, "Andrei Alexandrescu");
 }
 
