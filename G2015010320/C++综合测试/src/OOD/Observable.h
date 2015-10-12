@@ -106,4 +106,24 @@ public:
   }
 };
 
+// provides a bind and unbind static method to
+// to bind a observer ctrl to a observable model
+class Binder
+{
+public:
+  template<typename T>
+  static void bind(Handler<T> &hd, Observable<T> &ob) {
+    ob.bind(&hd);
+  }
+
+  template<typename T>
+  static void unbind(Handler<T> &hd, Observable<T> &ob) {
+    ob.unbind(&hd);
+  }
+
+private:
+  Binder() { }
+  ~Binder() { }
+};
+
 #endif // __OBSERVABLE_H__

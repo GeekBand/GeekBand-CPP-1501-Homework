@@ -13,7 +13,7 @@ int main()
       points.push_back(new Point(i, j));
     }
   }
-  
+
   Polygon pg1(points);
   std::cout << pg1 << std::endl;
   Polygon pg2(pg1);
