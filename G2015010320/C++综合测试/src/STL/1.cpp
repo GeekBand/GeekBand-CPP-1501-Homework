@@ -1,16 +1,16 @@
-// The entry point of Qustion 1 of STL
+// The entry point of Question 1 of STL
 
 #include <vector>
 #include <iostream>
 
 // copy values of not equal to 'target' to the dest vector
 template<typename T>
-void not_equal_to(const std::vector<T> &src, std::vector<T> &dest, T target) {
+void not_equal_to(const std::vector<T> &src, std::vector<T> &dest, const T &target) {
   for (typename std::vector<T>::const_iterator it = std::begin(src); 
     it != std::end(src); ++it) {
     if (*it != target) {
       dest.push_back(*it);
-	}
+	  }
   }
 }
 
