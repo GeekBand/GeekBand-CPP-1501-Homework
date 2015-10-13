@@ -17,7 +17,7 @@ public:
     if (this == &lhs) {
       return *this;
     }
-    
+
     this->x_ = lhs.x_;
     this->y_ = lhs.y_;
     return *this;

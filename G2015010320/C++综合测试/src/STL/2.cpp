@@ -113,19 +113,20 @@ int main() {
   
   std::set<const Programmer *, ProgrammerIdGreater> p_set_A(ps, ps + N);
   std::cout << "Origin set A: " << p_set_A << std::endl;
-  // find the Programmer with id = 3;
+  // find the Programmer with id = 3
   {
     std::auto_ptr<Programmer> target(new Programmer(3, "David Vandevoorde"));
-    std::set<const Programmer *, ProgrammerIdGreater>::iterator found = p_set_A.find(target.get());
-    if (found != std::end(p_set_A)) { // found it and replace
+    std::set<const Programmer *, ProgrammerIdGreater>::iterator found = 
+      p_set_A.find(target.get());
+    if (found != std::end(p_set_A)) { // found it and modify then
       // this const cast is necessary, since we need to change the name here
       const_cast<Programmer *>(*found)->setName(target->name());
     }
   }
-  std::cout << "Replaced set A: " << p_set_A << std::endl;
+  std::cout << "Modified set A: " << p_set_A << std::endl;
 
   std::set<const Programmer *, ProgrammerNameLess> p_set_B(ps, ps + N);
-  std::cout << "Origin set B: " << p_set_B << std::endl;
+  std::cout << "Modified set B: " << p_set_B << std::endl;
 
   cleanArr(ps, N);
   return 0;

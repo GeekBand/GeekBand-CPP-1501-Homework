@@ -8,8 +8,9 @@
 #include <cassert>
 #include <iostream>
 
-// value changed destination
-// you need implement the specified value changed destination.
+// define a value changed destination.
+// you can implement the specified value changed destination,
+// and bind to an obserable model through a handler.
 // e.g. TextBoxValueChanged, ConsoleValueChanged
 template<class T>
 class ValueChanged
@@ -106,8 +107,8 @@ public:
   }
 };
 
-// provides a bind and unbind static method to
-// to bind a observer ctrl to a observable model
+// provides a bind and unbind static method for
+// binding an observer handler to an observable model
 class Binder
 {
 public:

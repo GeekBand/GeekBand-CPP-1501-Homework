@@ -12,8 +12,8 @@ int main()
   // define a observable model(point) with origin value(1, 2)
   Observable<Point> op(origin);
   // define and bind an observer handler to above observable model(point)
-  std::auto_ptr< Handler<Point> > console_h(Handlers::accept<Point>(std::cout));
-  std::auto_ptr< Handler<Point> > box_h(Handlers::accept<Point>(box));
+  std::auto_ptr< Handler<Point> > console_h(Handlers::of<Point>(std::cout));
+  std::auto_ptr< Handler<Point> > box_h(Handlers::of<Point>(box));
   Binder::bind(*console_h.get(), op);
   Binder::bind(*box_h.get(), op);
 

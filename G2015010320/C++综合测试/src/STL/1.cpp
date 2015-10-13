@@ -28,11 +28,9 @@ operator<< (std::ostream &os, const std::vector<T> &v) {
 }
 
 int main() {
+  const int N = 10;
   int arr[] = { 0, 0, 30, 20, 0, 0, 0, 0, 10, 0 };
-  std::vector<int> v1;
-  for (int i = 0; i < 10; ++i) {
-    v1.push_back(arr[i]);
-  }
+  std::vector<int> v1(arr, arr + N);
 
   std::cout << v1 << std::endl;
   std::vector<int> v2;

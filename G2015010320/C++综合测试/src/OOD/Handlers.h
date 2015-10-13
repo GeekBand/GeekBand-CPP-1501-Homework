@@ -46,16 +46,17 @@ public:
   }
 };
 
+// create a handler of value-changed destination
 class Handlers
 {
 public:
   template<typename T>
-  static Handler<T> *accept(std::ostream &os) {
+  static Handler<T> *of(std::ostream &os) {
     return new Handler<T>(new OStreamValueChanged<T>(os));
   }
-  
+
   template<typename T>
-  static Handler<T> *accept(TextBox &box) {
+  static Handler<T> *of(TextBox &box) {
     return new Handler<T>(new TextBoxValueChanged<T>(box));
   }
 
