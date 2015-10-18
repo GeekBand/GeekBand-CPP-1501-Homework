@@ -37,10 +37,10 @@ public:
 protected:
 	virtual void OnProgress(float value)
 	{
-		List<IPprogress*>::iterator itor = m_ipprogress.begin();
-		while(itor != m_ipprogress.end())
+		List<IPprogress*>::iterator itor = m_ipprogressList.begin();
+		while(itor != m_ipprogressList.end())
 		{
-			DoProgess(value);          // 虚函数，在 IPprogress的子类中分别实现，不同的进度条通知
+			(*itor)->DoProgess(value);          // 虚函数，在 IPprogress的子类中分别实现，不同的进度条通知
 			itor++;
 		}
 	}
