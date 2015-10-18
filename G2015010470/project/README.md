@@ -6,6 +6,6 @@
 
 <pre><code>mkdir build
 cd build
-qmake SelfLearningCheckers.pro
+qmake ../SelfLearningCheckers.pro
 make
 </code></pre>
