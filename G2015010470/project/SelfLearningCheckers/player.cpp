@@ -23,7 +23,8 @@ void Player::onEvent(const Event &event) {
         if (data != 0) {
             const CheckersData* board = (const CheckersData*)data;
             const CheckersState* gameState = (const CheckersState*)state;
-            if (gameState->getCurrentPlayer() == BLACK) {
+            if (gameState->getChessState() == INPROGRESS &&
+                    gameState->getCurrentPlayer() == BLACK) {
                 strategy->move(board);
             }
         }

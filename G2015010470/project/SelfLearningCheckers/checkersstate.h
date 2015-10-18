@@ -1,7 +1,6 @@
 #ifndef CHECKERSSTATE_H
 #define CHECKERSSTATE_H
 #include "colleague.h"
-#include "colleague.h"
 
 namespace checkers {
 

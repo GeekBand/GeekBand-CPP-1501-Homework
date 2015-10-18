@@ -9,14 +9,14 @@ using namespace checkers;
 
 int main(int argc, char *argv[])
 {
-//    QApplication a(argc, argv);
-//    CheckersData* board = new CheckersData;
-//    CheckersState* state = new CheckersState;
-//    MoveStrategy* strategy = new MovesRandom;
-//    Player* mechinePlayer = new Player(strategy);
-//    Window w;
+    QApplication a(argc, argv);
+    CheckersData* board = new CheckersData;
+    CheckersState* state = new CheckersState;
+    MoveStrategy* strategy = new MovesRandom;
+    Player* mechinePlayer = new Player(strategy);
+    Window w;
 
-//    w.show();
+    w.show();
 
-//    return a.exec();
+    return a.exec();
 }

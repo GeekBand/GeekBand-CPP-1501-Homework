@@ -85,15 +85,8 @@ void ChessBoard::doClickSquare(int row, int col) {
     const CheckersState* gameState = getCheckersState();
     if (board == 0 || gameState == 0)
         return ;
-
     Square currPlayer = gameState->getCurrentPlayer();
     LegalMoves moves = board->getLegalMoves(currPlayer);
-//    if (moves.size() == 0) {
-        //game over
-//        Event e(NOTIFY_MESSAGE);
-//        e.setMessage("You lost!");
-//        this->fireEvent(e);
-//    }
     for (unsigned int i = 0; i < moves.size(); ++i) {
         if (moves[i].fromRow == row && moves[i].fromCol == col) {
             selectedRow = row;
@@ -109,7 +102,7 @@ void ChessBoard::doClickSquare(int row, int col) {
     }
 
     //If a piece is selected.
-    if (selectedRow < 0) {
+    if (selectedRow < 0 && gameState->getChessState() == INPROGRESS) {
         sendMessage("Click the piece you want to move.");
         return;
     }

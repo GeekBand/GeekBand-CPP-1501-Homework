@@ -7,12 +7,14 @@ CheckersState::CheckersState(ChessState state,
      Mediator::getInstance().attach(ACTION_NEWGAME, this);
      Mediator::getInstance().attach(ACTION_SETUP, this);
      Mediator::getInstance().attach(ACTION_REVERSE, this);
+     Mediator::getInstance().attach(NOTIFY_GAMEOVER, this);
 }
 
 CheckersState::~CheckersState() {
     Mediator::getInstance().detach(ACTION_NEWGAME, this);
     Mediator::getInstance().detach(ACTION_SETUP, this);
     Mediator::getInstance().detach(ACTION_REVERSE, this);
+    Mediator::getInstance().detach(NOTIFY_GAMEOVER, this);
 }
 
 ChessState CheckersState::getChessState() const {
@@ -33,7 +35,6 @@ void CheckersState::setCurrentPlayer(Square curPlayer) {
 
 void CheckersState::doSetup() {
     this->state = GAMEOVER;
-    this->curPlayer = RED;
 }
 
 void CheckersState::doNewGame() {

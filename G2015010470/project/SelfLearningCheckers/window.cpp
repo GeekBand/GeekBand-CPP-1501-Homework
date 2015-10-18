@@ -47,6 +47,7 @@ Window::Window()
     widget->setWindowTitle(tr("Checkers"));
 
     Mediator::getInstance().attach(NOTIFY_MESSAGE, this);
+    Mediator::getInstance().attach(NOTIFY_GAMEOVER, this);
 
     Event e(ACTION_SETUP, this);
     this->fireEvent(e);
@@ -71,7 +72,7 @@ void Window::createAction() {
 }
 
 void Window::createMenu() {
-    gameMenu = menuBar()->addMenu(tr("&Game"));
+    gameMenu = menuBar()->addMenu(tr("&New Game"));
     gameMenu->addAction(newGameAction);
     //gameMenu->addAction(resignAction);
     //gameMenu->addAction(exitAction);
@@ -98,10 +99,13 @@ void Window::exit() {
 
 Window::~Window() {
     Mediator::getInstance().detach(NOTIFY_MESSAGE, this);
+    Mediator::getInstance().detach(NOTIFY_GAMEOVER, this);
 }
 
 void Window::onEvent(const Event& event) {
     if (event.getName() == NOTIFY_MESSAGE) {
+        shapeLabel->setText(QString::fromStdString(event.getMessage()));
+    } else if (event.getName() == NOTIFY_GAMEOVER) {
         shapeLabel->setText(QString::fromStdString(event.getMessage()));
     }
 }

@@ -13,13 +13,19 @@ void MovesRandom::move(const CheckersData* board) const{
         if (moves[r].isJump()) {
             jump(board, moves[r].toRow, moves[r].toCol);
         }
-        Event e(ACTION_REVERSE);
-        Mediator::getInstance().fireEvent(e);
+        if (board->getLegalMoves(RED).size() != 0) {
+            Event e(ACTION_REVERSE);
+            Mediator::getInstance().fireEvent(e);
+        } else {
+            Event g(NOTIFY_GAMEOVER);
+            g.setMessage("You lost!");
+            Mediator::getInstance().fireEvent(g);
+        }
+
     } else {
-        //game over
-            Event e(NOTIFY_MESSAGE);
-            e.setMessage("You won!");
-            this->fireEvent(e);
+        Event g(NOTIFY_GAMEOVER);
+        g.setMessage("You won!");
+        Mediator::getInstance().fireEvent(g);
     }
 }
 
