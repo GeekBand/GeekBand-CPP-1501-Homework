@@ -9,3 +9,6 @@ cd build
 qmake ../SelfLearningCheckers.pro
 make
 </code></pre>
+
+## ³ÌÐò½ØÍ¼
+![game shot](https://github.com/crest55/GeekBand-CPP-1501-Homework/blob/master/G2015010470/project/checkers.png)
