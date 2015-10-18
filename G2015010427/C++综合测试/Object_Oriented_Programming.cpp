@@ -57,3 +57,72 @@ private:
 
 
 //面向对象与设计 第二题
+class Subject;
+
+class Observer {
+public:
+  virtual ~Observer();
+  virtual void Update(Subject* theChangedSubject) = 0;
+protected:
+  Observer();
+};
+
+class Subject {
+public:
+  virtual ~Subject();
+
+  virtual void Attach(Observer* obj) {
+    observers->append(obj);
+  };
+  virtual void Detach(Observer* obj);
+    observers->remove(obj);
+  virtual void Notify() {
+    for (obj in observers) {
+      obj->Update(this);
+    }
+  };
+protected:
+  Subject();
+private:
+  List<Observer*> *observers;
+};
+
+class Point : public Subject {
+public:
+  Point();
+  void MovePos() {
+    //move
+
+    //then notify it's observers(Printers)
+    Notify();
+  }
+public:
+  int x;
+  int y;
+};
+
+class Printer {
+public:
+ virtual void print() = 0; 
+protected:
+  Pointer* ptr;
+};
+
+class StdoutPrinter : public Printer, public Observer {
+public:
+  StdoutPrinter(Pointer *p) {
+    ptr = p;
+    ptr->Attach(this);
+  }
+  ~StdoutPrinter() {
+    ptr->Detach(this);
+  }
+  void Update(Subject* theChangedSubject) {
+    if (theChangedSubject == ptr) {
+      print() 
+    }
+  }
+  virtual print() {
+    //print to the stdout
+  }
+};
