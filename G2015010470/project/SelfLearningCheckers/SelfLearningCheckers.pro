@@ -33,5 +33,3 @@ HEADERS  += window.h \
     enum.h \
     movestrategy.h \
     player.h
-
-FORMS    += window.ui
